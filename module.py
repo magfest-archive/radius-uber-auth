@@ -87,7 +87,10 @@ def authorize(attrs):
                             (('Cleartext-Password', badge),),
                         )
                     else:
-                        return RLM_MODULE_REJECT
+                        return (
+                            RLM_MODULE_REJECT,
+                            ('Reply-Message', 'No Wi-Fis for you! Contact TechOps if this is in error.')
+                        )
                     break
 
     return RLM_MODULE_NOTFOUND
