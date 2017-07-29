@@ -62,15 +62,15 @@ def authorize(attrs):
                 if attendee['email'] == email and attendee['badge_num'] == badge_num:
 
                     badge_type = attendee['badge_type_label']
-                    ribbon = attendee['ribbon_label']
+                    ribbons = attendee['ribbon_labels']
 
                     can_wifi = (
                         ATTENDEE_WIFI
-                        or PANELIST_WIFI and ribbon == 'Panelist'
-                        or VENDOR_WIFI and ribbon == 'Shopkeep'
-                        or BAND_WIFI and ribbon == 'RockStar'
-                        or GUEST_WIFI and ribbon == 'Guest'
-                        or VOLUNTEER_WIFI and ribbon == 'Volunteer'
+                        or PANELIST_WIFI and 'Panelist' in ribbons
+                        or VENDOR_WIFI and 'Shopkeep' in ribbons
+                        or BAND_WIFI and 'RockStar' in ribbons
+                        or GUEST_WIFI and 'Guest' in ribbons
+                        or VOLUNTEER_WIFI and 'Volunteer' in ribbons
                         or STAFF_WIFI and attendee.get('staffing', False)
                     )
 
