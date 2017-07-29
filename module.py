@@ -1,15 +1,10 @@
-from rpctools.jsonrpc import ServerProxy
 import os
 
 UBER_URL = os.environ.get("UBER_URL", "https://staging3.uber.magfest.org:4444/jsonrpc/")
 UBER_CERT = os.environ.get("UBER_CERT", "./client.crt")
 UBER_KEY = os.environ.get("UBER_KEY", "./client.key")
 
-service = ServerProxy(
-    uri=UBER_URL,
-    cert_file=UBER_CERT,
-    key_file=UBER_KEY,
-)
+service = None
 
 STAFF_WIFI     = True
 VOLUNTEER_WIFI = True
@@ -32,6 +27,16 @@ RLM_MODULE_UPDATED  =  8 #  OK (pairs modified)
 RLM_MODULE_NUMCODES =  9 #  How many return codes there are
 
 # TODO make it configurable which fields correspond to username/password
+
+def instantiate():
+    from rpctools.jsonrpc import ServerProxy
+    global service
+    service = ServerProxy(
+        uri=UBER_URL,
+        cert_file=UBER_CERT,
+        key_file=UBER_KEY,
+    )
+
 
 def authorize(attrs):
     # a tuple of key-value tuples = a dict, yay!
