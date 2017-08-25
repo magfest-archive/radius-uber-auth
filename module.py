@@ -94,3 +94,14 @@ def authorize(attrs):
                     break
 
     return RLM_MODULE_NOTFOUND
+
+if __name__ == "__main__":
+    instantiate()
+
+    try:
+        while True:
+            username = input("Username / email: ")
+            password = input("Password / badge: ")
+            print(authorize({'User-Name': '"' + username + '"', "User-Password": '"' + password + '"'}))
+    except KeyboardInterrupt:
+        pass
