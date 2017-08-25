@@ -57,7 +57,7 @@ def authorize(attrs):
 
         try:
             badge_num = int(badge)
-        except NumberParseException:
+        except ValueError:
             return RLM_MODULE_REJECT
 
         res = service.attendee.search("email:{}".format(email))
